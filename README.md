@@ -1,6 +1,8 @@
 # Terminal Idle Tycoon
 A python based terminl game tycoon like
 
+![Screenshot 2022-02-21 180649](https://user-images.githubusercontent.com/64192029/154991047-6fc2fc1f-f901-4490-bee7-d6a53784bf55.png)
+
 ## Usage
 1. Make sure python3 is installed on your machine
 ```bash
