@@ -280,7 +280,7 @@ def workerIncome(worker):
     :return:
     :rtype:
     """
-    return round(BASE_PRICE + GAIN ** worker)
+    return round(BASE_PRICE + GAIN ** worker) * worker
 
 
 def getUpgradePrice(worker):
