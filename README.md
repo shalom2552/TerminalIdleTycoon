@@ -9,7 +9,7 @@ python3 --version
 ```
 2. Go to file location
 ```bash
-cd {your_download_folder}/TerminalIdleTycoon/
+cd ~/{your_download_folder}/TerminalIdleTycoon/
 ```
 3. Run the script
 ```bash
