@@ -21,10 +21,12 @@ python3 ./IdelTycoon.py
 ## Fixes
   1. make static borders
   2. Fix 'Gain' and 'Factor' calculations
+  3. Space the cash view
   
 ## Future
   1. Make it a gui
   2. Add a parallel game running
+  3. 
   
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
