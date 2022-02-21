@@ -22,21 +22,13 @@ class bcolors:
 def main():
     """
     """
+    print(bcolors.HEADER + "Hello and welcome to Idle Game!" + bcolors.ENDC)
     cash, income, workers = 10, 0, [0 for _ in range(MAX_WORKERS)]
     while True:
         printStatus(cash, income, workers)
         cash, income, workers = operate(cash, income, workers)
         income = calculateIncome(workers)
     pass
-
-
-def printStart():
-    """
-    :return:
-    :rtype:
-    """
-    print(bcolors.HEADER + "Hello and welcome to Idle Game!" + bcolors.ENDC)
-    return
 
 
 def getNextRuns():
