@@ -1,5 +1,5 @@
 # Terminal Idle Tycoon
-A python based terminl game tycoon like
+A python-based game tycoon-like for terminal
 
 ![Screenshot 2022-02-21 180649](https://user-images.githubusercontent.com/64192029/154991047-6fc2fc1f-f901-4490-bee7-d6a53784bf55.png)
 
