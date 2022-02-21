@@ -6,6 +6,7 @@ A python-based game tycoon-like for terminal
 </p>
 
 <br>
+
 ## Usage
 1. Make sure python3 is installed on your machine
 ```bash
