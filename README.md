@@ -1,7 +1,9 @@
 # Terminal Idle Tycoon
 A python-based game tycoon-like for terminal
 
-![Gamplay-view](https://user-images.githubusercontent.com/64192029/154991047-6fc2fc1f-f901-4490-bee7-d6a53784bf55.png)
+<p align="center">
+  <img src="https://i.ibb.co/jgz57S9/Screenshot-2022-02-21-180649.png" title="hover text">
+</p>
 
 ## Usage
 1. Make sure python3 is installed on your machine
