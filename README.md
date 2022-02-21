@@ -34,6 +34,7 @@ python3 ./IdelTycoon.py
   1. Make it a GUI
   2. Add a running game parallel
   3. Create objects: farm, worker
+  4. add total 1:+0.1 upgradable bonus per run
   
 <br>
 
