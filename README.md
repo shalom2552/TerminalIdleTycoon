@@ -7,9 +7,9 @@ A python based terminl game tycoon like
 sudo apt-get -y install python3 
 python3 --version
 ```
-2. Go to the file location
+2. Go to file location
 ```bash
-cd ~/TerminalIdleTycoon/
+cd {your_download_folder}/TerminalIdleTycoon/
 ```
 3. Run the script
 ```bash
