@@ -5,6 +5,7 @@ MAX_WORKERS = 5
 BASE_PRICE = 10
 FACTOR = 2.5
 GAIN = 2
+START_CASH = 10
 
 
 class bcolors:
@@ -23,10 +24,11 @@ def main():
     """
     """
     print(bcolors.HEADER + "Hello and welcome to Idle Game!" + bcolors.ENDC)
-    cash, income, workers = 10, 0, [0 for _ in range(MAX_WORKERS)]
+    cash, income, workers = START_CASH, 0, [0 for _ in range(MAX_WORKERS)]
     while True:
+        brake()
         printStatus(cash, income, workers)
-        cash, income, workers = operate(cash, income, workers)
+        cash, income, workers = play(cash, income, workers)
         income = calculateIncome(workers)
     pass
 
@@ -56,12 +58,11 @@ def getNextRuns():
     return next_round
 
 
-def Round(cash, income):
-    next_runs = getNextRuns()
+def Round(cash, income, ticks):
     round_income = 0
-    while next_runs > 0:
+    while ticks > 0:
         round_income = round_income + income
-        next_runs -= 1
+        ticks -= 1
     cash = cash + round_income
     print(bcolors.BOLD + bcolors.OKBLUE + "Cash = " + str(cash) + " + " + str(round_income))
     return cash, income
@@ -98,7 +99,7 @@ def calculateIncome(workers):
     return income
 
 
-def operate(cash, income, workers):
+def play(cash, income, workers):
     """
     :param cash:
     :type cash:
@@ -131,7 +132,8 @@ def operate(cash, income, workers):
 
 
 def Run(cash, income):
-    cash, income = Round(cash, income)
+    ticks = getNextRuns()
+    cash, income = Round(cash, income, ticks)
     return cash, income
 
 
@@ -145,16 +147,16 @@ def addWorker(cash, workers):
     :rtype:
     """
     if countWorkers(workers) >= MAX_WORKERS:
-        print(bcolors.FAIL + "You have maximum of " + str(MAX_WORKERS) + " workers!" + bcolors.ENDC)
-        return
+        print(bcolors.BOLD + bcolors.FAIL + "You have maximum of " + str(MAX_WORKERS) + " workers!" + bcolors.ENDC)
+        return cash, workers
     worker_price = BASE_PRICE
     if worker_price <= cash:
         index = get_index(workers, True)
         workers[index] = 1
         cash -= worker_price
-        print(bcolors.HEADER + "Added New Worker, for the price: " + str(worker_price) + bcolors.ENDC)
+        print(bcolors.BOLD + bcolors.HEADER + "New Worker Added, at a cost of: " + bcolors.FAIL + str(worker_price) + bcolors.ENDC)
     else:
-        print(bcolors.FAIL + "You dont have enough cash!" + bcolors.ENDC)
+        print(bcolors.BOLD + bcolors.FAIL + "You dont have enough cash!" + bcolors.ENDC)
     # printWorkers(workers, cash)
     return cash, workers
 
@@ -172,8 +174,8 @@ def get_index(workers, free):
         workers_list = [i + 1 for i in range(MAX_WORKERS) if workers[i] == 0]
     else:
         workers_list = [i + 1 for i in range(MAX_WORKERS) if workers[i] != 0]
-    index = int(input(bcolors.OKBLUE + bcolors.BOLD + "Select a worker number -> "
-                      + str(workers_list) + " : " + bcolors.ENDC) or 0)
+    index = int(input(bcolors.OKBLUE + bcolors.BOLD + "Select a worker number -> {"
+                      + str(workers_list[0]) + ",...," + str(workers_list[-1]) + "}" + " : " + bcolors.ENDC) or 0)
     while index < 1 or index > MAX_WORKERS:
         print(bcolors.FAIL + "Enter a valid worker number please!" + bcolors.ENDC)
         index = int(input(bcolors.OKBLUE + bcolors.BOLD + "Select a worker number -> "
@@ -208,32 +210,22 @@ def upgradeWorker(cash, workers):
 
 def printWorkers(workers, cash):
     """
-    :param workers:
-    :type workers:
-    :param cash:
-    :type cash:
-    """
-    print(bcolors.OKGREEN + "You have " + str(countWorkers(workers)) + " workers." + bcolors.ENDC)
-    printWorkingWorkers(workers, cash)
-    pass
-
-
-def printWorkingWorkers(workers, cash):
-    """
-    :param workers:
-    :type workers:
-    :param cash:
-    :type cash:
-    """
+        :param workers:
+        :type workers:
+        :param cash:
+        :type cash:
+        """
+    brake()
+    print(bcolors.BOLD + bcolors.OKBLUE + "\tYou have " + str(countWorkers(workers)) + " workers." + bcolors.ENDC)
+    print(bcolors.HEADER + bcolors.BOLD + "\tTotal Cash: " + bcolors.OKGREEN + str(cash) + bcolors.ENDC)
     workers_table = []
     working_index = 1
     for worker in workers:
         if worker > 0:
             workers_table.append([working_index, worker, workerIncome(worker), getUpgradePrice(worker)])
             working_index += 1
-    print(bcolors.OKGREEN + bcolors.BOLD + "Total cash:" + str(cash) + bcolors.ENDC)
     print(bcolors.OKGREEN + bcolors.BOLD, end="")
-    for worker in workers_table:
+    for _ in workers_table:
         print("┌───────────────┐ \t", end="")
     print()
     for worker in workers_table:
@@ -256,7 +248,7 @@ def printWorkingWorkers(workers, cash):
         print("│ " + bcolors.HEADER + " Cost:\t" + color + str(worker[3]) +
               bcolors.OKGREEN + "\t│\t", end="")
     print()
-    for worker in workers_table:
+    for _ in workers_table:
         print("└───────────────┘ \t", end="")
     print(bcolors.ENDC)
     pass
@@ -269,7 +261,7 @@ def workerIncome(worker):
     :return:
     :rtype:
     """
-    return BASE_PRICE + worker ** GAIN
+    return round(BASE_PRICE + GAIN ** worker)
 
 
 def getUpgradePrice(worker):
@@ -279,7 +271,7 @@ def getUpgradePrice(worker):
     :return:
     :rtype:
     """
-    level_cost = worker ** FACTOR
+    level_cost = FACTOR ** worker
     return round(BASE_PRICE + level_cost)
 
 
@@ -295,6 +287,13 @@ def countWorkers(workers):
         if workers[i] > 0:
             working += 1
     return working
+
+
+def brake():
+    print(bcolors.BOLD + bcolors.OKGREEN +
+          "├──────────────────────────────────────────────────────────"
+          "──────────────────────────────────────┤" + bcolors.ENDC)
+    pass
 
 
 if __name__ == '__main__':
