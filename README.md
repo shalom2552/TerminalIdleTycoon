@@ -8,12 +8,12 @@ A python-based game tycoon-like for terminal
 <br>
 
 ## Usage
-1. Make sure python3 is installed on your machine
+1. Make sure that python3 is installed on your machine
 ```bash
 sudo apt-get -y install python3 
 python3 --version
 ```
-2. Go to file location
+2. Go to the file location
 ```bash
 cd ~/{your_download_folder}/TerminalIdleTycoon/
 ```
@@ -32,8 +32,8 @@ python3 ./IdelTycoon.py
   
 ## Future
   1. Make it a GUI
-  2. Add a parallel game running
-  3. Create Objects: farm, worker
+  2. Add a running game parallel
+  3. Create objects: farm, worker
   
 <br>
 
