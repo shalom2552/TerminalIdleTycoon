@@ -94,7 +94,7 @@ def calculateIncome(workers):
     """
     income = 0
     for worker in workers:
-        income = income + worker * GAIN + worker * FACTOR
+        income = income + workerIncome(worker)
     return income
 
 
@@ -269,7 +269,7 @@ def workerIncome(worker):
     :return:
     :rtype:
     """
-    return worker ** GAIN
+    return BASE_PRICE + worker ** GAIN
 
 
 def getUpgradePrice(worker):
