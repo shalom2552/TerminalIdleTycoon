@@ -3,11 +3,6 @@ A python-based game tycoon-like for terminal
 
 ![Gamplay-view](https://user-images.githubusercontent.com/64192029/154991047-6fc2fc1f-f901-4490-bee7-d6a53784bf55.png)
 
-<p align="center">
-   <img src="[https://user-images.githubusercontent.com/64192029/154991047-6fc2fc1f-f901-4490-bee7-d6a53784bf55.png]" alt="[Gamplay-view]"/>
-</p>
-
-
 ## Usage
 1. Make sure python3 is installed on your machine
 ```bash
