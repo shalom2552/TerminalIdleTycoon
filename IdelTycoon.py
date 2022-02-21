@@ -5,6 +5,7 @@ MAX_WORKERS = 5
 BASE_PRICE = 10
 FACTOR = 2.5
 GAIN = 2
+START_CASH = 10
 
 
 class bcolors:
@@ -23,7 +24,7 @@ def main():
     """
     """
     print(bcolors.HEADER + "Hello and welcome to Idle Game!" + bcolors.ENDC)
-    cash, income, workers = 10, 0, [0 for _ in range(MAX_WORKERS)]
+    cash, income, workers = START_CASH, 0, [0 for _ in range(MAX_WORKERS)]
     while True:
         printStatus(cash, income, workers)
         cash, income, workers = operate(cash, income, workers)
