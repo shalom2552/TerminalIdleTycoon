@@ -45,4 +45,4 @@ Please make sure to update tests as appropriate.
 <br>
 
 # License
-shalom2552 @shalas45 The software and all code files are under the copyright protection of shalas45. Transferring the software without permission is a violation of the manufacturer's rights 21/02/2022
+@shalom2552 The software and all code files are under the copyright protection of shalas45. Transferring the software without permission is a violation of the manufacturer's rights 21/02/2022
