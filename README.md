@@ -1,5 +1,6 @@
 # Terminal Idle Tycoon
 Python-based idle tycoon game played in the terminal
+
 Time spent on code until release: 3 hours
 
 <p align="center">
