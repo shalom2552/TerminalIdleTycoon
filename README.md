@@ -18,6 +18,14 @@ python3 --version
 ```bash
 git clone https://github.com/shalom2552/TerminalIdleTycoon.git
 ```
+or
+```bash
+wget https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
+```
+Using cURL
+```bash
+curl -L https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
+```
 3. Go to the file location
 ```bash
 cd ~/{your_download_folder}/TerminalIdleTycoon/
