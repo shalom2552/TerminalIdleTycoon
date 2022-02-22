@@ -18,7 +18,7 @@ python3 --version
 ```bash
 git clone https://github.com/shalom2552/TerminalIdleTycoon.git
 ```
-#### or
+> or
 ```bash
 wget https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
 ```
