@@ -14,18 +14,19 @@ sudo apt-get -y install python3
 python3 --version
 ```
 >### 2. Get the files
->
+>> Clone
 >```bash
 >git clone https://github.com/shalom2552/TerminalIdleTycoon.git
 >```
->> or
-```bash
-wget https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
-```
+>> Or
+>>```bash
+>>wget https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
+>>```
+>
 >> Using cURL
-```bash
-curl -L https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
-```
+>>```bash
+>>curl -L https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
+>>```
 ### 3. Go to the file location
 ```bash
 cd ~/{your_download_folder}/TerminalIdleTycoon/
