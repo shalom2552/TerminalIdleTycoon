@@ -38,20 +38,20 @@ python3 ./IdelTycoon.py
 ```
 <br>
 
-# Additions & Fixes
-  1. Add total play time 
-  2. Add runs round counter
-  3. make static borders
-  4. Fix 'Gain' and 'Factor' calculations
-  5. Space the cash view
+# Fixes
+  1. Fix Static borders
+  2. Fix 'Gain' and 'Factor' calculations
+  3. Space the cash view
 
 <br>
   
 # Future
-  1. Make it a GUI
-  2. Add a running game parallel
-  3. Create objects: farm, worker
-  4. add total 1:+0.1 upgradable bonus per run
+  1. Add total play time
+  2. Add runs round counter
+  2. Make it a GUI
+  3. Add a running game parallel
+  4. Create objects: farm, worker
+  5. add total 1:+0.1 upgradable bonus per run
   
 <br>
 
