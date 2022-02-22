@@ -8,12 +8,12 @@ Python-based idle tycoon game played in the terminal
 <br>
 
 # Usage
-## 1. Make sure that python3 is installed on your machine
+### 1. Make sure that python3 is installed on your machine
 ```bash
 sudo apt-get -y install python3 
 python3 --version
 ```
-## 2. Clone this repository
+### 2. Get the files
 
 ```bash
 git clone https://github.com/shalom2552/TerminalIdleTycoon.git
@@ -26,11 +26,11 @@ Using cURL
 ```bash
 curl -L https://github.com/shalom2552/TerminalIdleTycoon/archive/refs/heads/main.zip
 ```
-## 3. Go to the file location
+### 3. Go to the file location
 ```bash
 cd ~/{your_download_folder}/TerminalIdleTycoon/
 ```
-## 4. Run the script
+### 4. Run the script
 ```bash
 python3 ./IdelTycoon.py
 ```
