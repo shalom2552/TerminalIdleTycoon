@@ -13,7 +13,12 @@ Python-based idle tycoon game played in the terminal
 sudo apt-get -y install python3 
 python3 --version
 ```
-2. Go to the file location
+2. Clone this repository
+
+```bash
+git clone https://github.com/shalom2552/TerminalIdleTycoon.git
+```
+3. Go to the file location
 ```bash
 cd ~/{your_download_folder}/TerminalIdleTycoon/
 ```
