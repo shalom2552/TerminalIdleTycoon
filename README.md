@@ -23,10 +23,12 @@ python3 ./IdelTycoon.py
 ```
 <br>
 
-## Fixes
-  1. make static borders
-  2. Fix 'Gain' and 'Factor' calculations
-  3. Space the cash view
+## Additions & Fixes
+  1. Add total play time 
+  2. Add runs round counter
+  3. make static borders
+  4. Fix 'Gain' and 'Factor' calculations
+  5. Space the cash view
 
 <br>
   
