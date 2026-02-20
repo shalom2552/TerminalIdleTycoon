@@ -1,14 +1,13 @@
+from getch import getch
 import time
+import os
 
-"""
-Constants
-"""
+# Constants
 MAX_WORKERS = 5
 BASE_PRICE = 10
 FACTOR = 2.5
 GAIN = 2
 START_CASH = 10
-
 
 class bcolors:
     HEADER = '\033[95m'
@@ -21,10 +20,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-
 def main():
-    """
-    """
     print(bcolors.HEADER + "Hello and welcome to Idle Game!" + bcolors.ENDC)
     cash, income, workers = START_CASH, 0, [0 for _ in range(MAX_WORKERS)]
     while True:
@@ -32,35 +28,30 @@ def main():
         printStatus(cash, income, workers)
         cash, income, workers = play(cash, income, workers)
         income = calculateIncome(workers)
-    pass
 
+def getUserInput(valid_input_list):
+    key = getch()
+    while(key not in valid_input_list):
+        if key in [b'\x1b', 'q']:
+            exit(0)
+        print(bcolors.FAIL + "Invalid input, try again!" + bcolors.ENDC)
+        key = getch()
+    return key
 
 def getNextRuns():
-    """
-    :return:
-    :rtype:
-    """
     next_round = 25
-    res = input(bcolors.BOLD +
+    print(bcolors.BOLD + bcolors.HEADER + "Select number of rounds to simulate:\n" +
                 bcolors.OKCYAN + "(1) " + bcolors.HEADER + "One round\n" +
                 bcolors.OKCYAN + "(2) " + bcolors.HEADER + "10 rounds\n" +
                 bcolors.OKCYAN + "(3) " + bcolors.HEADER + "25 rounds\n" +
                 bcolors.OKCYAN + "(4) " + bcolors.HEADER + "50 rounds\n" +
                 bcolors.OKCYAN + "(5) " + bcolors.HEADER + "100 rounds\n" + bcolors.ENDC)
-    if res == '1':
-        next_round = 1
-    elif res == '2':
-        next_round = 10
-        time.sleep(2)
-    elif res == '3':
-        next_round = 25
-        time.sleep(4)
-    elif res == "4":
-        next_round = 50
-        time.sleep(6)
-    elif res == '5':
-        next_round = 100
-        time.sleep(8)
+
+    next_round = getUserInput(['1','2','3','4','5'])
+
+    next_round = 10
+    print(f"Simulating {next_round} days...")
+    time.sleep(next_round / 10)
     return next_round
 
 
@@ -75,30 +66,16 @@ def Round(cash, income, ticks):
 
 
 def printStatus(cash, income, workers):
-    """
-    :param cash:
-    :type cash:
-    :param income:
-    :type income:
-    :param workers:
-    :type workers:
-    """
     print(bcolors.OKGREEN + "┌───────────────────────────────┐")
-    print("│ \t\t " + bcolors.BOLD + bcolors.HEADER + "Farm Stats" + bcolors.OKGREEN + " \t\t\t│")
-    print("│ Cash: \t" + bcolors.OKBLUE + "{:^20}".format(str(cash)) + bcolors.OKGREEN + "│")
-    print("│ Income: \t" + bcolors.OKBLUE + "{:^20}".format(str(income)) + bcolors.OKGREEN + "│")
-    print("│ Workers: \t" + bcolors.OKBLUE + "{:^20}".format(str(countWorkers(workers))) + bcolors.OKGREEN + "│")
+    print("│ \t " + bcolors.BOLD + bcolors.HEADER + "Farm Stats" + bcolors.OKGREEN + " \t\t│")
+    print("│ Cash:    " + bcolors.OKBLUE + "{:^20}".format(str(cash)) + bcolors.OKGREEN + " │")
+    print("│ Income:  " + bcolors.OKBLUE + "{:^20}".format(str(income)) + bcolors.OKGREEN + " │")
+    print("│ Workers: " + bcolors.OKBLUE + "{:^20}".format(str(countWorkers(workers))) + bcolors.OKGREEN + " │")
     print("└───────────────────────────────┘" + bcolors.ENDC)
     pass
 
 
 def calculateIncome(workers):
-    """
-    :param workers:
-    :type workers:
-    :return:
-    :rtype:
-    """
     income = 0
     for worker in workers:
         income = income + workerIncome(worker)
@@ -106,24 +83,16 @@ def calculateIncome(workers):
 
 
 def play(cash, income, workers):
-    """
-    :param cash:
-    :type cash:
-    :param income:
-    :type income:
-    :param workers:
-    :type workers:
-    :return:
-    :rtype:
-    """
     cash, income = Round(cash, income, 1)
-    res = input(bcolors.BOLD +
+    print(bcolors.BOLD +
                 bcolors.OKCYAN + "(1) " + bcolors.HEADER + "Buy New Worker\n" +
                 bcolors.OKCYAN + "(2) " + bcolors.HEADER + "Upgrade Worker\n" +
                 bcolors.OKCYAN + "(3) " + bcolors.HEADER + "See workers table\n" +
                 bcolors.OKCYAN + "(4) " + bcolors.HEADER + "See stats\n" +
                 bcolors.OKCYAN + "(5) " + bcolors.HEADER + "Run\n" +
                 bcolors.OKCYAN + "(6) " + bcolors.HEADER + "Quit\n" + bcolors.ENDC)
+    res = getUserInput(['1','2','3','4','5','6', 'q'])
+
     if res == '1':
         cash, income = Round(cash, income, 1)
         cash, workers = addWorker(cash, workers)
@@ -135,7 +104,7 @@ def play(cash, income, workers):
         printStatus(cash, income, workers)
     elif res == '5':
         cash, income = Run(cash, income)
-    elif res == '6':
+    elif res in ['6', 'q']:
         print(bcolors.BOLD + bcolors.HEADER + "Score: " + bcolors.OKGREEN
               + str(income) + bcolors.ENDC)
         exit(0)
@@ -151,14 +120,6 @@ def Run(cash, income):
 
 
 def addWorker(cash, workers):
-    """
-    :param cash:
-    :type cash:
-    :param workers:
-    :type workers:
-    :return:
-    :rtype:
-    """
     if countWorkers(workers) >= MAX_WORKERS:
         print(bcolors.BOLD + bcolors.FAIL + "You have maximum of " + str(MAX_WORKERS) + " workers!" + bcolors.ENDC)
         return cash, workers
@@ -178,36 +139,17 @@ def addWorker(cash, workers):
 
 
 def get_index(workers, free):
-    """
-    :param workers:
-    :type workers:
-    :param free:
-    :type free:
-    :return:
-    :rtype:
-    """
     if free:
         workers_list = [i + 1 for i in range(MAX_WORKERS) if workers[i] == 0]
     else:
         workers_list = [i + 1 for i in range(MAX_WORKERS) if workers[i] != 0]
-    index = int(input(bcolors.OKBLUE + bcolors.BOLD + "Select a worker number -> {"
-                      + str(workers_list[0]) + ",...," + str(workers_list[-1]) + "}" + " : " + bcolors.ENDC) or 0)
-    while index < 1 or index > MAX_WORKERS:
-        print(bcolors.FAIL + "Enter a valid worker number please!" + bcolors.ENDC)
-        index = int(input(bcolors.OKBLUE + bcolors.BOLD + "Select a worker number -> "
-                          + str(workers_list) + " : " + bcolors.ENDC))
-    return index - 1
+    index = print(bcolors.OKBLUE + bcolors.BOLD + "Select worker number -> {"
+                      + str(workers_list[0]) + ",...," + str(workers_list[-1]) + "}" + " : " + bcolors.ENDC)
+    index = getUserInput([str(i) for i in workers_list])
+    return int(index) - 1
 
 
 def upgradeWorker(cash, workers):
-    """
-    :param cash:
-    :type cash:
-    :param workers:
-    :type workers:
-    :return:
-    :rtype:
-    """
     if countWorkers(workers) == 0:
         print(bcolors.BOLD + bcolors.FAIL + "You dont have any workers!" + bcolors.ENDC)
         return cash, workers
@@ -228,12 +170,6 @@ def upgradeWorker(cash, workers):
 
 
 def printWorkers(workers, cash):
-    """
-        :param workers:
-        :type workers:
-        :param cash:
-        :type cash:
-        """
     brakeLine()
     print(bcolors.BOLD + bcolors.OKBLUE + "\tYou have " + str(countWorkers(workers)) + " workers." + bcolors.ENDC)
     print(bcolors.HEADER + bcolors.BOLD + "\tTotal Cash: " + bcolors.OKGREEN + str(cash) + bcolors.ENDC)
@@ -248,15 +184,15 @@ def printWorkers(workers, cash):
         print("┌───────────────┐ \t", end="")
     print()
     for worker in workers_table:
-        print("│ " + bcolors.HEADER + " Worker:\t" + bcolors.OKCYAN +
+        print("│ " + bcolors.HEADER + " Worker: " + bcolors.OKCYAN +
               str(worker[0]) + bcolors.OKGREEN + "\t│\t", end="")
     print()
     for worker in workers_table:
-        print("│ " + bcolors.HEADER + " Level:\t" + bcolors.OKCYAN +
+        print("│ " + bcolors.HEADER + " Level:  " + bcolors.OKCYAN +
               str(worker[1]) + bcolors.OKGREEN + "\t│\t", end="")
     print()
     for worker in workers_table:
-        print("│ " + bcolors.HEADER + " Income:\t" + bcolors.OKCYAN +
+        print("│ " + bcolors.HEADER + " Income: " + bcolors.OKCYAN +
               str(worker[2]) + bcolors.OKGREEN + "\t│\t", end="")
     print()
     for worker in workers_table:
@@ -264,43 +200,27 @@ def printWorkers(workers, cash):
             color = bcolors.FAIL
         else:
             color = bcolors.OKGREEN
-        print("│ " + bcolors.HEADER + " Cost:\t" + color + str(worker[3]) +
+        print("│ " + bcolors.HEADER + " Cost:   " + color + str(worker[3]) +
               bcolors.OKGREEN + "\t│\t", end="")
     print()
     for _ in workers_table:
         print("└───────────────┘ \t", end="")
+    print("\nPress any key...")
     print(bcolors.ENDC)
+    getch()
     pass
 
 
 def workerIncome(worker):
-    """
-    :param worker:
-    :type worker:
-    :return:
-    :rtype:
-    """
     return round(BASE_PRICE + GAIN ** worker) * worker
 
 
 def getUpgradePrice(worker):
-    """
-    :param worker:
-    :type worker:
-    :return:
-    :rtype:
-    """
     level_cost = FACTOR ** worker
     return round(BASE_PRICE + level_cost)
 
 
 def countWorkers(workers):
-    """
-    :param workers:
-    :type workers:
-    :return:
-    :rtype:
-    """
     working = 0
     for i in range(MAX_WORKERS):
         if workers[i] > 0:
@@ -309,8 +229,9 @@ def countWorkers(workers):
 
 
 def brakeLine():
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(bcolors.BOLD + bcolors.OKGREEN +
-          "├──────────────────────────────────────────────────────────"
+          "├─────────────────────────────"
           "──────────────────────────────────────┤" + bcolors.ENDC)
     pass
 
